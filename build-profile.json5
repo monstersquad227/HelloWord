@@ -1,0 +1,56 @@
+{
+  "app": {
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "/Users/monstersquad/.ohos/config/default_HelloWord_-2l3_IAktTKMNWFkowKHCGmWKN_4CLaIhNNzfdEkpmg=.cer",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001A8C1E3F56390184DA31861161F60F03EA39059E48061F815B89D0B502CCE475073864DD74CB2A",
+          "profile": "/Users/monstersquad/.ohos/config/default_HelloWord_-2l3_IAktTKMNWFkowKHCGmWKN_4CLaIhNNzfdEkpmg=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "/Users/monstersquad/.ohos/config/default_HelloWord_-2l3_IAktTKMNWFkowKHCGmWKN_4CLaIhNNzfdEkpmg=.p12",
+          "storePassword": "0000001A113245E32EADAB4C61430DFB9E6246015FD57A2CE294BA1729650C75A66F5593F67EEAAC4129"
+        }
+      }
+    ],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "targetSdkVersion": "5.0.5(17)",
+        "compatibleSdkVersion": "5.0.5(17)",
+        "runtimeOS": "HarmonyOS",
+        "buildOption": {
+          "strictMode": {
+            "caseSensitiveCheck": true,
+            "useNormalizedOHMUrl": true
+          }
+        }
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug",
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    }
+  ]
+}

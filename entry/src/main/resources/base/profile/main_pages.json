@@ -1,0 +1,12 @@
+{
+    "src": [
+	"pages/Login/LoginPage",
+	"pages/Main/MainPage",
+	"pages/Main/ContentOnePage",
+	"pages/Main/SubPages/AddMedicationRegimenPage",
+	"pages/Main/SubPages/SupportAuthorPage",
+	"pages/Main/SubPages/FeatureFeedbackPage",
+	"pages/Main/SubPages/PersonalInformationPage",
+	"pages/Index"
+    ]
+}
