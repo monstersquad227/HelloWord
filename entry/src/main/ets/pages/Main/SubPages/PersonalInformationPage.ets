@@ -16,24 +16,26 @@ struct PersonalInformationPage {
                 .alignSelf(ItemAlign.Start)
                 .margin({ left: 20, top: 20, })
 
-            Row({ space: 200 }) {
+            Row() {
                 Text('头像')
+                Blank().flexGrow(1)
                 Image($r('app.media.circle'))
                     .width('30')
                     .height('30')
             }
             .width('100%')
-            .justifyContent(FlexAlign.Center)
+            .padding(20)
 
 
-            Row({ space: 115 }) {
+            Row() {
                 Text('昵称')
+                Blank().flexGrow(1)
                 Text('用户54979976')
                     .width('110')
                     .height('30')
             }
             .width('100%')
-            .justifyContent(FlexAlign.Center)
+            .padding(20)
         }
         .width('100%')
         .height('100%')
