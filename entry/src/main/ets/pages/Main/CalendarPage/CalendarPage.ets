@@ -4,10 +4,7 @@ export struct CalendarPage {
     @State year: number = new Date().getFullYear();
     @State month: number = new Date().getMonth() + 1;
     @State days: Array<string> = this.generateDays();
-
-    onInit() {
-        this.generateDays();
-    }
+    private weekTitles: Array<string> = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
 
     build() {
         Column() {
@@ -19,6 +16,7 @@ export struct CalendarPage {
                     .height(16)
                     .onClick(() => {
                         this.getPreviousMonth()
+                        this.days = this.generateDays()
                     })
                 Text(`${this.formatDate(this.year, this.month)}`)
                     .fontSize(20)
@@ -29,20 +27,33 @@ export struct CalendarPage {
                     .height(16)
                     .onClick(() => {
                         this.getNextMonth()
+                        this.days = this.generateDays()
                     })
             }
 
             // 日历主体
             Grid() {
-                ForEach(this.days, (days: string) => {
+                ForEach(this.weekTitles, (weekTitles: string) => {
                     GridItem() {
-                        Text(days)
+                        Text(weekTitles)
                     }
                     .height(40)
                     .width(40)
-                    .backgroundColor('#e6f7ff')
-                    .borderRadius(6)
-                }, (days: string): string => days)
+                }, (weekTitles: string): string => weekTitles)
+
+                ForEach(this.days, (days: string) => {
+                    GridItem() {
+                        Text(days !== '' ? days : ' ')
+                            .fontSize(14)
+                            .width(30)
+                            .height(30)
+                            .textAlign(TextAlign.Center)
+                            .backgroundColor(days !== '' ? '#e6f7ff' : 'transparent')
+                            .borderRadius(15)
+                    }
+                    .height(30)
+                    .width(30)
+                }, (day: string): string => day + Math.random())
 
             }
             .rowsTemplate('1fr 1fr 1fr 1fr 1fr 1fr 1fr' as string)
@@ -73,12 +84,21 @@ export struct CalendarPage {
     }
 
     private generateDays(): Array<string> {
-        const daysInMonth = new Date(this.year, this.month, 0).getDate();
-        const newDays: string[] = [];
-        for (let i = 1; i <= daysInMonth; i++) {
-            newDays.push(i.toString());
+        const days: string[] = [];
+        // 获取该月第一天是星期几（0=周日，6=周六）
+        const firstDayDate = new Date(this.year, this.month - 1, 1)
+        const firstDayOfWeek = firstDayDate.getDay()
+        // 这个月有多少天
+        const daysInMonth = new Date(this.year, this.month, 0).getDate()
+        // 添加前导空白
+        for (let i = 0; i < firstDayOfWeek; i++) {
+            days.push('')
         }
-        return newDays;
+        // 添加实际天数
+        for (let i = 1; i <= daysInMonth; i++) {
+            days.push(i.toString())
+        }
+        return days
     }
 
     private formatDate(year: number, month: number): string {
