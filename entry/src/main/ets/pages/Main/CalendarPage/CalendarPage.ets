@@ -63,6 +63,13 @@ export struct CalendarPage {
                                     ? '#ffffff'
                                     : '#000000'
                             )
+                            .fontWeight(
+                                this.year === this.today.year &&
+                                    this.month === this.today.month &&
+                                    parseInt(days) === this.today.day
+                                    ? 'bold'
+                                    : 'normal'
+                            )
                             .width(30)
                             .height(30)
                             .textAlign(TextAlign.Center)// .backgroundColor(days !== '' ? '#e6f7ff' : 'transparent')
