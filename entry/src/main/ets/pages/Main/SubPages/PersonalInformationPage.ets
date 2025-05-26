@@ -1,6 +1,5 @@
 import { router } from '@kit.ArkUI'
 
-@Preview
 @Entry
 @Component
 struct PersonalInformationPage {
