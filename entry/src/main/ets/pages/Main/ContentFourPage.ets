@@ -30,7 +30,7 @@ export struct ContentFourPage {
                 }
                 .width('33.33%')
                 .onClick(() => {
-                    router.pushUrl({ url: 'pages/Main/SubPages/PersonalInformationPage'})
+                    router.pushUrl({ url: 'pages/Main/SubPages/PersonalInformationPage' })
                 })
 
                 Column({ space: 8 }) {
@@ -52,13 +52,13 @@ export struct ContentFourPage {
             Row() {
                 Text($r('app.string.SupportAuthor'))
                 Image($r('app.media.right_grey'))
-                    .width('16')
-                    .height('16')
+                    .width(16)
+                    .height(16)
             }
             .justifyContent(FlexAlign.SpaceBetween)
             .padding('10')
             .width('90%')
-            .height('6%')
+            .height('8%')
             .border({ width: 1, color: '#cccccc', radius: '8' })
             .backgroundColor('#f9f9f9')
             .onClick(() => {
