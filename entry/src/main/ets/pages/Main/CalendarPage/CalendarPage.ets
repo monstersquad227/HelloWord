@@ -1,3 +1,9 @@
+interface todayInterface {
+    year: number;
+    month: number;
+    day: number;
+}
+
 @Preview
 @Component
 export struct CalendarPage {
@@ -5,6 +11,11 @@ export struct CalendarPage {
     @State month: number = new Date().getMonth() + 1;
     @State days: Array<string> = this.generateDays();
     private weekTitles: Array<string> = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+    private readonly today: todayInterface = {
+        year: new Date().getFullYear(),
+        month: new Date().getMonth() + 1,
+        day: new Date().getDate()
+    };
 
     build() {
         Column() {
@@ -45,10 +56,23 @@ export struct CalendarPage {
                     GridItem() {
                         Text(days !== '' ? days : ' ')
                             .fontSize(14)
+                            .fontColor(
+                                this.year === this.today.year &&
+                                    this.month === this.today.month &&
+                                    parseInt(days) === this.today.day
+                                    ? '#ffffff'
+                                    : '#000000'
+                            )
                             .width(30)
                             .height(30)
-                            .textAlign(TextAlign.Center)
-                            .backgroundColor(days !== '' ? '#e6f7ff' : 'transparent')
+                            .textAlign(TextAlign.Center)// .backgroundColor(days !== '' ? '#e6f7ff' : 'transparent')
+                            .backgroundColor(
+                                days !== '' &&
+                                    this.year === this.today.year &&
+                                    this.month === this.today.month &&
+                                    parseInt(days) === this.today.day
+                                    ? Color.Red
+                                    : 'transparent')
                             .borderRadius(15)
                     }
                     .height(30)
