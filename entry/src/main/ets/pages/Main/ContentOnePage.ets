@@ -1,5 +1,6 @@
 import { AddMedicationRegimenDiaLog } from './DiaLog/AddMedicationRegimenDiaLog';
 import { router } from '@kit.ArkUI';
+import { CalendarPage } from './CalendarPage/CalendarPage';
 
 @Entry
 @Component
@@ -28,9 +29,14 @@ export struct ContentOnePage {
 
     build() {
         Column({ space: 20 }) {
-            Image($r('app.media.background'))
-                .width('100%')
-                .height('50%')
+            Row() {
+                CalendarPage()
+            }.height('50%')
+
+
+            // Image($r('app.media.background'))
+            //     .width('100%')
+            //     .height('50%')
 
             Image($r('app.media.background'))
                 .width('80')
