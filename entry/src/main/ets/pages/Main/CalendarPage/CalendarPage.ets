@@ -40,6 +40,20 @@ export struct CalendarPage {
                         this.getNextMonth()
                         this.days = this.generateDays()
                     })
+
+                Button() {
+                    Text('今日')
+                        .fontSize(16)
+                        .fontWeight('bold')
+                        .fontColor('#007aff')
+                }
+                .width(60)
+                .height(30)
+                .backgroundColor(Color.White)
+                .borderRadius(6)
+                .onClick(() => {
+                    this.goToday()
+                })
             }
 
             // 日历主体
@@ -92,6 +106,12 @@ export struct CalendarPage {
         }
         .height('100%')
         .width('100%')
+    }
+
+    private goToday() {
+        this.year = this.today.year
+        this.month = this.today.month
+        this.days = this.generateDays()
     }
 
     private getPreviousMonth() {
