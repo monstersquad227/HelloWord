@@ -1,5 +1,13 @@
 {
   "module": {
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.INTERNET"
+      },
+      {
+        "name": "ohos.permission.GET_NETWORK_INFO" // 如果使用PathPreference的'cellular'模式，则需要额外申请此权限
+      }
+    ],
     "name": "entry",
     "type": "entry",
     "description": "$string:module_desc",

@@ -33,6 +33,9 @@ export struct ContentOnePage {
                 CalendarPage()
             }.height('50%')
 
+            // .backgroundImage($r('app.media.logo'))
+            // .backgroundImageSize({ width: '100%', height: '100%' }) // 拉伸背景图至整个区域
+            // .backgroundImagePosition({ x: 0, y: 0 }) // 左上角对齐
 
             // Image($r('app.media.background'))
             //     .width('100%')

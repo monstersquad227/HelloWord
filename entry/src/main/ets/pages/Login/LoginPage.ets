@@ -1,5 +1,27 @@
-import hilog from '@ohos.hilog';
-import { router } from '@kit.ArkUI';
+import http from '@ohos.net.http';
+import { prompt, router } from '@kit.ArkUI';
+
+
+interface UserInfo {
+    id: number;
+    nickname: string;
+    image: string;
+    phone_num: string;
+    password: string;
+    created_at: string;
+    updated_at: string;
+}
+
+interface LoginResult {
+    token: string;
+    user: UserInfo;
+}
+
+interface ApiResponse {
+    code: number;
+    message: string;
+    result: LoginResult;
+}
 
 /**
  * Login page
@@ -49,8 +71,35 @@ struct LoginPage {
                     bottom: '12'
                 })
                 .onClick(() => {
-                    hilog.error(0x0001, "testTag", "%{public}s World %{public}d", "hello", 3);
-                    router.pushUrl({ url: 'pages/Main/MainPage' })
+                    const httpRequest = http.createHttp();
+                    httpRequest.request(
+                        "http://10.11.11.56:8080/medicine/user/login",
+                        {
+                            method: http.RequestMethod.POST,
+                            header: {
+                                "Content-Type": "application/json"
+                            },
+                            extraData: {
+                                phone_num: this.account,
+                                password: this.password
+                            },
+                            readTimeout: 6000,
+                            connectTimeout: 6000
+                        },
+                        (err, data) => {
+                            if (err) {
+                                AlertDialog.show({ title: '失败', message: JSON.stringify(err) });
+                                return;
+                            }
+                            let parsed: ApiResponse;
+                            parsed = JSON.parse(data.result as string) as ApiResponse;
+                            prompt.showToast({ message: '登录成功: ' + parsed.result.user.nickname });
+                            AppStorage.set("nickname", parsed.result.user.nickname)
+                            router.pushUrl({ url: 'pages/Main/MainPage' })
+                            // JSON.stringify(data)
+                            // AlertDialog.show({ title: '成功', message: data.result.token });
+                        }
+                    )
                 })
         }
         .padding({
