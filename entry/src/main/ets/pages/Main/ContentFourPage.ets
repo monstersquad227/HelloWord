@@ -2,7 +2,6 @@ import { router } from '@kit.ArkUI';
 
 @Component
 export struct ContentFourPage {
-    @StorageProp('nickname') nickname: string = '未登录';
 
     build() {
         Column({ space: 20 }) {
@@ -14,7 +13,7 @@ export struct ContentFourPage {
                 })
 
             // Text($r('app.string.UserID'))
-            Text(this.nickname ?? '未登录')
+            Text(AppStorage.get('nickname'))
 
             Row() {
                 Column({ space: 8 }) {
