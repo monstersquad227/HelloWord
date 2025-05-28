@@ -3,6 +3,7 @@
         "pages/Login/LoginPage",
         "pages/Main/MainPage",
         "pages/Main/ContentOnePage",
+        "pages/Main/ContentTwoPage",
         "pages/Main/SubPages/MedicineCourse",
         "pages/Main/SubPages/SupportAuthorPage",
         "pages/Main/SubPages/FeatureFeedbackPage",

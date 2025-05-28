@@ -1,7 +1,7 @@
 import { ContentFourPage } from './ContentFourPage';
 import { ContentOnePage } from './ContentOnePage';
 import { ContentThreePage } from './ContentThreePage';
-import { ContentTwoPage } from './ContentTwoPage';
+import { ProductTab } from './SubPages/testContent';
 
 @Preview
 @Entry
@@ -36,7 +36,8 @@ struct MainPage {
             .tabBar(this.tabBuilder("吃药打卡", 0, $r('app.media.icon'), $r('app.media.icon')))
 
             TabContent() {
-                ContentTwoPage()
+                ProductTab()
+                // ContentTwoPage()
             }
             .tabBar(this.tabBuilder('我的用药', 1, $r('app.media.icon'), $r('app.media.icon')))
 
@@ -50,6 +51,7 @@ struct MainPage {
             }
             .tabBar(this.tabBuilder('我的', 3, $r('app.media.circle'), $r('app.media.circle')))
         }
+        .scrollable(false)
         .onChange((val) => {
             this.currentIndex = val
         })

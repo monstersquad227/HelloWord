@@ -71,9 +71,10 @@ struct MedicineCourse {
                                 left: '10.00vp'
                             })
                     }
+                    .margin({ top: '20.00vp', bottom: '20.00vp' })
                 }
                 .width('90%')
-                .height('13%')
+                // .height('13%')
                 .border({ width: 1, color: '#cccccc', radius: '8' })
 
                 // 药物用量
@@ -134,9 +135,9 @@ struct MedicineCourse {
                         }
                         .margin({ left: '10.00vp', right: '10.00vp' })
                     }
+                    .margin({ top: '20.00vp', bottom: '20.00vp' })
                 }
                 .width('90%')
-                .height('20%')
                 .border({ width: 1, color: '#cccccc', radius: '8' })
 
                 // 用药时间
@@ -177,9 +178,9 @@ struct MedicineCourse {
                                 })
                         }.margin({ left: '10.00vp', right: '10.00vp' })
                     }
+                    .margin({ top: '20.00vp', bottom: '20.00vp' })
                 }
                 .width('90%')
-                .height('15%')
                 .border({ width: 1, color: '#cccccc', radius: '8' })
 
                 // 补充信息
@@ -244,9 +245,10 @@ struct MedicineCourse {
                         }
                         .margin({ left: '10.00vp', right: '10.00vp' })
                     }
+                    .margin({ top: '20.00vp', bottom: '20.00vp' })
                 }
                 .width("90%")
-                .height('22%')
+                // .height('22%')
                 .border({ width: 1, color: '#cccccc', radius: '8' })
 
                 Button('保存')
