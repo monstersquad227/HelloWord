@@ -54,7 +54,7 @@ export struct ContentOnePage {
                 .borderRadius('16')
                 .fontSize('16')
                 .onClick(() => {
-                    router.pushUrl({ url: 'pages/Main/SubPages/AddMedicationRegimenPage' })
+                    router.pushUrl({ url: 'pages/Main/SubPages/MedicineCourse' })
                 })
 
             Button($r('app.string.WriteANote'))

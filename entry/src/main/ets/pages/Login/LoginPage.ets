@@ -1,14 +1,19 @@
 import http from '@ohos.net.http';
 import { promptAction, router } from '@kit.ArkUI';
+import { baseHeader, baseURL } from '../../constant/constant';
 
 
 /**
  * Login page
  */
 interface userInfo {
+    id: number;
     nickname: string;
+    image: string;
     phone_num: string;
+    password: string;
 }
+
 interface result {
     token: string;
     user: userInfo;
@@ -23,7 +28,7 @@ interface LoginResponse {
 @Entry
 @Component
 struct LoginPage {
-    @State account: string = '';
+    @State account: string = '15056332824';
     @State password: string = '123456';
 
     build() {
@@ -71,59 +76,30 @@ struct LoginPage {
                     bottom: '12'
                 })
                 .onClick(() => {
-                    let  httpRequest = http.createHttp();
-                    let URL = "http://192.168.1.8:8080/medicine/user/login"
+                    let httpRequest = http.createHttp();
+                    let URL = baseURL + '/user/login'
                     let promise = httpRequest.request(URL, {
                         method: http.RequestMethod.POST,
                         connectTimeout: 60000,
                         readTimeout: 60000,
-                        header: {
-                            "Content-Type": "application/json"
-                        },
+                        header: baseHeader,
                         extraData: {
                             phone_num: this.account,
                             password: this.password
                         },
                         expectDataType: http.HttpDataType.OBJECT
                     });
-                    promise.then((data:http.HttpResponse) => {
-                        let result = data.result as LoginResponse; // 显式声明类型（可选）
+                    promise.then((data: http.HttpResponse) => {
+                        let result = data.result as LoginResponse;
                         if (result.code != 0) {
                             promptAction.showToast({ message: result.message });
                             return;
                         }
+                        AppStorage.setOrCreate('token', result.result.token)
                         AppStorage.setOrCreate('nickname', result.result.user.nickname)
+                        AppStorage.setOrCreate('user_id', result.result.user.id)
                         router.pushUrl({ url: 'pages/Main/MainPage' })
                     })
-                    // httpRequest.request("http://192.168.1.8:8080/medicine/user/login", {
-                    //         method: http.RequestMethod.POST,
-                    //         header: {
-                    //             "Content-Type": "application/json"
-                    //         },
-                    //         extraData: {
-                    //             phone_num: this.account,
-                    //             password: this.password
-                    //         },
-                    //         readTimeout: 3000,
-                    //         connectTimeout: 3000
-                    //     }, (err, data) => {
-                    //         if (err) {
-                    //             promptAction.showToast({ message: '失败: ' + JSON.stringify(err)})
-                    //             // AlertDialog.show({ title: '失败', message: JSON.stringify(err) });
-                    //             return;
-                    //         }
-                    //         // let parsed: ApiResponse;
-                    //         // parsed = JSON.parse(data.result as string) as ApiResponse;
-                    //         // prompt.showToast({ message: '登录成功: ' + parsed.result.user.nickname });
-                    //         // AppStorage.setOrCreate('nickname', parsed.result.user.nickname)
-                    //         AppStorage.setOrCreate('nickname', '叶宁')
-                    //         promptAction.showToast({ message: data.result.toString()})
-                    //         // AlertDialog.show({ message: data.result.toString() });
-                    //         router.pushUrl({ url: 'pages/Main/MainPage' })
-                    //         // JSON.stringify(data)
-                    //         // AlertDialog.show({ title: '成功', message: data.result.token });
-                    //     }
-                    // )
                 })
         }
         .padding({
