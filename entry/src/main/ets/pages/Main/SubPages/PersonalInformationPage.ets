@@ -1,9 +1,8 @@
 import { CustomContentDialog, promptAction, router } from '@kit.ArkUI';
-import http from '@ohos.net.http';
+import { http } from '@kit.NetworkKit';
 import { baseURL } from '../../../constant/constant';
 import { parseJSON } from '../ContentTwoPage';
 
-// 尺寸常量
 const ITEM_HEIGHT = '30.00vp'
 const ITEM_WIDTH = '80%'
 
@@ -14,14 +13,16 @@ interface UpdateResponse {
 }
 
 @Component
-struct RowItem {
-    @State label: string = '';
-    @Link value: string | Resource;
+@Preview
+@Entry
+struct PersonalInformationPage {
+    @StorageProp('nickname') nickname: string = AppStorage.get('nickname') ?? '默认昵称';
+    @StorageProp('phone') phone: string = AppStorage.get('phone') ?? '18888888888';
     @State inputText: string = '';
     @State type: string = '';
     dialogController: CustomDialogController = new CustomDialogController({
         builder: CustomContentDialog({
-            primaryTitle: '修改' + this.label,
+            primaryTitle: '修改',
             contentBuilder: () => {
                 this.buildContent();
             },
@@ -44,17 +45,22 @@ struct RowItem {
                                 },
                                 expectDataType: http.HttpDataType.OBJECT
                             })
-                            promptAction.showToast({ message: this.inputText })
                             promise.then((data: http.HttpResponse) => {
                                 let response = parseJSON<UpdateResponse>(data.result.toString())
                                 if (response.code !== 0) {
                                     promptAction.showToast({ message: response.message });
                                     return;
                                 }
-                                AppStorage.setOrCreate('nickname', this.inputText)
-                                this.value = this.inputText
+                                //     AppStorage.setOrCreate('nickname', this.inputText)
+                                //     this.nickname = `${this.inputText}`
+                                //     // this.dialogController.close()
+                                //     promptAction.showToast({ message: AppStorage.get('nickname') })
                             })
-                        } else if (this.type === 'phone') {
+                            AppStorage.setOrCreate('nickname', this.inputText)
+                            this.nickname = this.inputText // 触发更新
+                            // promptAction.showToast({ message: AppStorage.get('nickname') })
+                        }
+                        if (this.type === 'phone') {
                             let httpRequest = http.createHttp()
                             let URL = baseURL + '/user/' + AppStorage.get('user_id') + '/phone'
                             let promise = httpRequest.request(URL, {
@@ -74,9 +80,10 @@ struct RowItem {
                                     promptAction.showToast({ message: response.message });
                                     return;
                                 }
-                                AppStorage.setOrCreate('phone_num', this.inputText)
-                                this.value = this.inputText
                             })
+                            AppStorage.setOrCreate('phone', this.inputText)
+                            this.phone = this.inputText
+                            // promptAction.showToast({ message: AppStorage.get('phone') })
                         }
                     }
                 },
@@ -89,56 +96,15 @@ struct RowItem {
         }),
     });
 
-    build() {
-        Row() {
-            Text(this.label).height(ITEM_HEIGHT)
-            Blank().flexGrow(1)
-            Text(this.value)
-                .onClick(() => {
-                    this.dialogController.open()
-                })
-        }
-        .justifyContent(FlexAlign.SpaceBetween)
-        .width(ITEM_WIDTH)
-        .height(ITEM_HEIGHT)
-    }
-
     @Builder
     buildContent(): void {
         Column() {
-            TextInput({ text: this.inputText, placeholder: this.value }).onChange((value: string) => {
+            TextInput({ text: this.inputText }).onChange((value: string) => {
                 this.inputText = value
             })
         }
         .width('100%')
     }
-}
-
-@Component
-struct RowImageItem {
-    @State label: string = ''
-    @State imageRes: Resource = $r('app.media.circle')
-
-    build() {
-        Row() {
-            Text(this.label).height(ITEM_HEIGHT)
-            Blank().flexGrow(1)
-            Image(this.imageRes)
-                .width(ITEM_HEIGHT)
-                .height(ITEM_HEIGHT)
-        }
-        .justifyContent(FlexAlign.SpaceBetween)
-        .width(ITEM_WIDTH)
-        .height(ITEM_HEIGHT)
-    }
-}
-
-@Preview
-@Entry
-@Component
-struct PersonalInformationPage {
-    @StorageProp('nickname') nickname: string | undefined = AppStorage.get('nickname');
-    @StorageProp('phone') phone: string | undefined = AppStorage.get('phone_num');
 
     build() {
         Column() {
@@ -154,10 +120,46 @@ struct PersonalInformationPage {
                 .margin({ left: 20, top: 20 })
 
             Column({ space: '20.00vp' }) {
-                // 用户信息展示
-                RowImageItem({ label: '头像', imageRes: $r('app.media.circle') })
-                RowItem({ label: '昵称', value: this.nickname, type: 'nickname' })
-                RowItem({ label: '手机号', value: this.phone, type: 'phone' })
+                Row() {
+                    Text('头像')
+                    Blank().flexGrow(1)
+                    Image($r('app.media.circle'))
+                        .width('30.00vp')
+                        .height('30.00vp')
+                }
+                .justifyContent(FlexAlign.SpaceBetween)
+                .width(ITEM_WIDTH)
+                .height(ITEM_HEIGHT)
+
+                Row() {
+                    Text('昵称').height(ITEM_HEIGHT)
+                    Blank().flexGrow(1)
+                    Text(this.nickname)
+                        .onClick(() => {
+                            this.inputText = this.nickname
+                            this.type = 'nickname'
+                            this.dialogController.open()
+                        })
+                }
+                .justifyContent(FlexAlign.SpaceBetween)
+                .width(ITEM_WIDTH)
+                .height(ITEM_HEIGHT)
+
+
+                Row() {
+                    Text('手机号').height(ITEM_HEIGHT)
+                    Blank().flexGrow(1)
+                    Text(this.phone)
+                        .onClick(() => {
+                            this.inputText = this.phone
+                            this.type = 'phone'
+                            this.dialogController.open()
+                        })
+                }
+                .justifyContent(FlexAlign.SpaceBetween).width(ITEM_WIDTH).height(ITEM_HEIGHT)
+                .onClick(() => {
+                    this.dialogController.open()
+                })
             }
             .margin({ top: '20.00vp' })
         }
