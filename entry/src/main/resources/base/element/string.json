@@ -1,96 +1,100 @@
 {
     "string": [
-	{
-	    "name": "module_desc",
-	    "value": "description"
-	},
-	{
-	    "name": "EntryAbility_desc",
-	    "value": "description"
-	},
-	{
-	    "name": "EntryAbility_label",
-	    "value": "昔音科技"
-	},
-	{
-	    "name": "login_page",
-	    "value": "Login page"
-	},
-	{
-	    "name": "login_more",
-	    "value": "Log in to your account to use more services"
-	},
-	{
-	    "name": "account",
-	    "value": "Phone Number"
-	},
-	{
-	    "name": "password",
-	    "value": "Password"
-	},
-	{
-	    "name": "login",
-	    "value": "Log in"
-	},
-	{
-	    "name": "register_account",
-	    "value": "Registering an Account"
-	},
-	{
-	    "name": "forgot_password",
-	    "value": "Forgot Password"
-	},
-	{
-	    "name": "message_login",
-	    "value": "SMS verification code login"
-	},
-	{
-	    "name": "other_login_method",
-	    "value": "Other login methods"
-	},
-	{
-	    "name": "vertical_line",
-	    "value": "  |  "
-	},
-	{
-	    "name": "input_empty_tips",
-	    "value": "The input cannot be empty."
-	},
-	{
-	    "name": "login_success",
-	    "value": "The login is successful."
-	},
-	{
-	    "name": "NoNeedToPunchInToday",
-	    "value": "今日无需打卡"
-	},
-	{
-	    "name": "AddMedicationRegimen",
-	    "value": "添加用药方案"
-	},
-	{
-	    "name": "WriteANote",
-	    "value": "写备注"
-	},
-	{
-	    "name": "UserID",
-	    "value": "用户54979976"
-	},
-	{
-	    "name": "FAQ",
-	    "value": "常见问题"
-	},
-	{
-	    "name": "PersonalInformation",
-	    "value": "个人信息"
-	},
-	{
-	    "name": "Feedback",
-	    "value": "功能反馈"
-	},
-	{
-	    "name": "SupportAuthor",
-	    "value": "支持作者"
-	}
+        {
+            "name": "module_desc",
+            "value": "description"
+        },
+        {
+            "name": "EntryAbility_desc",
+            "value": "description"
+        },
+        {
+            "name": "EntryAbility_label",
+            "value": "昔音科技"
+        },
+        {
+            "name": "login_page",
+            "value": "Login page"
+        },
+        {
+            "name": "login_more",
+            "value": "Log in to your account to use more services"
+        },
+        {
+            "name": "account",
+            "value": "Phone Number"
+        },
+        {
+            "name": "password",
+            "value": "Password"
+        },
+        {
+            "name": "login",
+            "value": "登录"
+        },
+        {
+            "name": "huaweiOneClickLogin",
+            "value": "华为账号一键登录"
+        },
+        {
+            "name": "register_account",
+            "value": "注册"
+        },
+        {
+            "name": "forgot_password",
+            "value": "忘记密码"
+        },
+        {
+            "name": "message_login",
+            "value": "SMS verification code login"
+        },
+        {
+            "name": "other_login_method",
+            "value": "Other login methods"
+        },
+        {
+            "name": "vertical_line",
+            "value": "  |  "
+        },
+        {
+            "name": "input_empty_tips",
+            "value": "The input cannot be empty."
+        },
+        {
+            "name": "login_success",
+            "value": "The login is successful."
+        },
+        {
+            "name": "NoNeedToPunchInToday",
+            "value": "今日无需打卡"
+        },
+        {
+            "name": "AddMedicationRegimen",
+            "value": "添加用药方案"
+        },
+        {
+            "name": "WriteANote",
+            "value": "写备注"
+        },
+        {
+            "name": "UserID",
+            "value": "用户54979976"
+        },
+        {
+            "name": "FAQ",
+            "value": "常见问题"
+        },
+        {
+            "name": "PersonalInformation",
+            "value": "个人信息"
+        },
+        {
+            "name": "Feedback",
+            "value": "功能反馈"
+        },
+        {
+            "name": "SupportAuthor",
+            "value": "支持作者"
+        }
     ]
 }

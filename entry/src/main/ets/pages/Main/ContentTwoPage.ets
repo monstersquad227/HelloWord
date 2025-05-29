@@ -68,10 +68,6 @@ export struct ContentTwoPage {
                                 .border({ width: 1, color: '#cccccc', radius: '8' })
                             })
                         }
-
-                        // .width('100%')
-                        // .height('100%')
-                        // .align(Alignment.Top)
                     }
                     .width('100%')
                     .height('88%')
@@ -126,7 +122,7 @@ export struct ContentTwoPage {
     }
 }
 
-function parseJSON<T>(jsonStr: string): T {
+export function parseJSON<T>(jsonStr: string): T {
     return JSON.parse(jsonStr) as T;
 }
 
