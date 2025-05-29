@@ -24,6 +24,9 @@ export struct ContentFourPage {
                     Text($r('app.string.FAQ'))
                 }
                 .width('33.33%')
+                .onClick(() => {
+                    router.pushUrl({ url: 'pages/Main/SubPages/CommonQuestionsPage' })
+                })
 
                 Column({ space: 8 }) {
                     Image($r('app.media.edit'))

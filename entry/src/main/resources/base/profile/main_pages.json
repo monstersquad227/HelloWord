@@ -8,6 +8,11 @@
         "pages/Main/SubPages/SupportAuthorPage",
         "pages/Main/SubPages/FeatureFeedbackPage",
         "pages/Main/SubPages/PersonalInformationPage",
+        "pages/Main/SubPages/CommonQuestionsPage",
+        "pages/Main/SubPages/AnswerPages/AnswerOnePages",
+        "pages/Main/SubPages/AnswerPages/AnswerTwoPages",
+        "pages/Main/SubPages/AnswerPages/AnswerThreePages",
+        "pages/Main/SubPages/AnswerPages/AnswerFourPages",
         "pages/Index"
     ]
 }
