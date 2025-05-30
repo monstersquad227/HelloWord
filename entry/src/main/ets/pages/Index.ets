@@ -9,10 +9,10 @@ struct Index {
         setTimeout(() => {
             const token = AppStorage.get<number>('aProp');
             if (token === 47) {
-                AlertDialog.show({ title: 'picture token', message: token?.toString() })
+                // AlertDialog.show({ title: 'picture token', message: token?.toString() })
                 router.replaceUrl({ url: "pages/Main/MainPage" })
             } else {
-                AlertDialog.show({ title: 'picture token', message: token?.toString() })
+                // AlertDialog.show({ title: 'picture token', message: token?.toString() })
                 router.replaceUrl({ url: "pages/Login/LoginPage" })
             }
         }, 200)

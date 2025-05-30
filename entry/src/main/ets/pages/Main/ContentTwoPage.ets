@@ -127,7 +127,7 @@ export function parseJSON<T>(jsonStr: string): T {
     return JSON.parse(jsonStr) as T;
 }
 
-function translateType(type: number): string {
+export function translateType(type: number): string {
     switch (type) {
         case 1:
             return '外服';
@@ -136,7 +136,7 @@ function translateType(type: number): string {
     }
 }
 
-function translateMedicineTime(medicineTime: number): string {
+export function translateMedicineTime(medicineTime: number): string {
     switch (medicineTime) {
         case 1:
             return '饭前用药';
