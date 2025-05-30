@@ -26,6 +26,7 @@ export struct ContentOnePage {
     @State textValue: string = '';
     @State inputValue: string = '点击添加备注';
     @State planData: planResult[] = [];
+    @State isRefresh: boolean = false;
     dialogController: CustomDialogController = new CustomDialogController({
         builder: AddMedicationRegimenDiaLog({
             textValue: $textValue,
@@ -52,121 +53,99 @@ export struct ContentOnePage {
 
     build() {
         Column({ space: 20 }) {
-            Row() {
-                CalendarPage()
-            }.height('50%')
+            Refresh({
+                refreshing: this.isRefresh
+            }) {
+                Column() {
+                    Row() {
+                        CalendarPage()
+                    }.height('50%')
 
-            if (this.planData.length > 0) {
-                Scroll() {
-                    Column({ space: '20.00vp' }) {
-                        ForEach(this.planData, (item: planResult) => {
-                            Row() {
+                    if (this.planData.length > 0) {
+                        Scroll() {
+                            Column() {
+                                // Refresh({
+                                //     refreshing: this.isRefresh
+                                // }) {
                                 Column({ space: '20.00vp' }) {
-                                    Row() {
-                                        Text(item.medicine_name + ' ' + item.amount + ' ' + item.type)
-                                            .fontWeight(FontWeight.Bold)
-                                    }
+                                    ForEach(this.planData, (item: planResult) => {
+                                        Row() {
+                                            Column({ space: '20.00vp' }) {
+                                                Text(item.medicine_name + ' ' + item.amount + ' ' + item.type)
+                                                    .fontWeight(FontWeight.Bold)
+                                                    .margin({ top: '10.00vp' })
+                                                Text(item.plan_time + ' ' + translateMedicineTime(item.medicine_timing))
+                                                    .margin({ bottom: '10.00vp' })
+                                            }
+                                            .alignItems(HorizontalAlign.Start)
+                                            .margin({ left: '20.00vp' })
 
-                                    Row() {
-                                        Text(item.plan_time + ' ' + translateMedicineTime(item.medicine_timing))
-                                    }
+                                            // Blank().grayscale(1)
 
+                                            Button('打卡')
+                                                .width('30%')
+                                                .height('25%')
+                                                .type(ButtonType.Normal)
+                                                .onClick(() => {
+                                                    console.log('打卡: ', item.medicine_name)
+                                                })
+                                                .margin({ right: '20.00vp' })
+                                        }
+                                        .width('85%')
+                                        .justifyContent(FlexAlign.SpaceBetween)
+                                        .border({ width: 1, color: '#cccccc', radius: 8 })
+                                    })
                                 }
 
-
-                                // Column({ space: '20.00vp' }) {
-                                //     Text(item.medicine_name + ' ' + item.amount + ' ' + item.type)
-                                //         .fontWeight(FontWeight.Bold)
-                                //
-                                //     Text(item.plan_time + ' ' + translateMedicineTime(item.medicine_timing))
-                                //         .fontColor('#666666')
                                 // }
-                                // .alignSelf(ItemAlign.Start)
-
-                                Blank().grayscale(1)
-
-                                Button('打卡')
-                                    .width('60')
-                                    .height('30')
-                                    .type(ButtonType.Normal)
-                                    .onClick(() => {
-                                        console.log('打卡: ', item.medicine_name)
-                                    })
-                                    .margin({ right: '20.00vp' })
+                                // .onRefreshing(() => {
+                                //     this.isRefresh = true
+                                //     this.getPlanList()
+                                //     setTimeout(() => {
+                                //         this.isRefresh = false
+                                //     }, 1000)
+                                // })
                             }
-                            .width('85%')
-                            .justifyContent(FlexAlign.SpaceBetween)
-                            .border({ width: 1, color: '#cccccc', radius: 8 })
-
-                            // Column({ space: '20.00vp' }) {
-                            //     Row() {
-                            //         Text(item.medicine_name + ' ' + item.amount + ' ' + item.type)
-                            //             .fontWeight(FontWeight.Bold)
-                            //     }
-                            //     .alignSelf(ItemAlign.Start)
-                            //     .margin({ top: '20.00vp', left: '20.00vp' })
-                            //
-                            //     Row() {
-                            //         Text(item.plan_time + ' ' + translateMedicineTime(item.medicine_timing))
-                            //     }
-                            //     .alignSelf(ItemAlign.Start)
-                            //     .margin({ bottom: '20.00vp', left: '20.00vp' })
-                            // }
-                            // .width('80%')
-                            // .border({ width: 1, color: '#cccccc', radius: 8 })
-                            //
-                            // Button('打卡')
-                        })
+                        }.height('35%')
+                    } else {
+                        Column({ space: '20.00vp' }) {
+                            Image($r('app.media.background'))
+                                .width('80')
+                                .height('80')
+                            Text($r('app.string.NoNeedToPunchInToday'))
+                            Button($r('app.string.AddMedicationRegimen'))
+                                .width('70%')
+                                .height('60')
+                                .type(ButtonType.Normal)
+                                .borderRadius('16')
+                                .fontSize('16')
+                                .onClick(() => {
+                                    router.pushUrl({ url: 'pages/Main/SubPages/MedicineCourse' })
+                                })
+                        }
                     }
 
-                }.height('35%')
-
-            } else {
-
-                Column({ space: '20.00vp' }) {
-                    Image($r('app.media.background'))
-                        .width('80')
-                        .height('80')
-                    Text($r('app.string.NoNeedToPunchInToday'))
-                    Button($r('app.string.AddMedicationRegimen'))
-                        .width('70%')
+                    Button($r('app.string.WriteANote'))
+                        .width('50%')
                         .height('60')
-                        .type(ButtonType.Normal)
-                        .borderRadius('16')
+                        .backgroundColor('#F4F7FF')
+                        .fontColor('#6599F2')
                         .fontSize('16')
                         .onClick(() => {
-                            router.pushUrl({ url: 'pages/Main/SubPages/MedicineCourse' })
+                            this.dialogController.open()
+                            console.log('写备注点击事件')
                         })
+                        .margin({ top: '20.00vp' })
                 }
             }
-
-            //
-            // Image($r('app.media.background'))
-            //     .width('80')
-            //     .height('80')
-            //
-            // Text($r('app.string.NoNeedToPunchInToday'))
-            //
-            // Button($r('app.string.AddMedicationRegimen'))
-            //     .width('70%')
-            //     .height('60')
-            //     .type(ButtonType.Normal)
-            //     .borderRadius('16')
-            //     .fontSize('16')
-            //     .onClick(() => {
-            //         router.pushUrl({ url: 'pages/Main/SubPages/MedicineCourse' })
-            //     })
-            //
-            Button($r('app.string.WriteANote'))
-                .width('50%')
-                .height('60')
-                .backgroundColor('#F4F7FF')
-                .fontColor('#6599F2')
-                .fontSize('16')
-                .onClick(() => {
-                    this.dialogController.open()
-                    console.log('写备注点击事件')
-                })
+            .onRefreshing(() => {
+                this.isRefresh = true
+                this.getPlanList()
+                setTimeout(() => {
+                    this.isRefresh = false
+                }, 1000)
+            })
+            .refreshOffset(100)
         }
         .width('100%')
         .height('100%')
@@ -189,6 +168,7 @@ export struct ContentOnePage {
                 return;
             }
             this.planData = response.result
+            // AlertDialog.show({ title: 'plandata', message: this.planData.toString() })
         })
     }
 }

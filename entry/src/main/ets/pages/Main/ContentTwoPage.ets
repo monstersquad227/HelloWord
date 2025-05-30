@@ -81,7 +81,10 @@ export struct ContentTwoPage {
             .onStateChange(() => {
                 this.isRefreshing = true
                 this.getCourseList()
-                this.isRefreshing = false
+                setTimeout(() => {
+                    this.isRefreshing = false
+                }, 1000)
+                // this.isRefreshing = false
             })
 
 
