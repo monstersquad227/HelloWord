@@ -3,14 +3,12 @@ import http from '@ohos.net.http';
 import { baseURL } from '../../constant/constant';
 
 interface MedicineCourse {
-    id: number
     medicine_name: string
     medicine_image: string
     medicine_type: number
     medicine_timing?: number
     course_start_time: string
-    created_at: string
-    updated_at: string
+    frequency: number
 }
 
 interface CourseResponse {
@@ -47,7 +45,10 @@ export struct ContentTwoPage {
                                             .fontWeight(FontWeight.Bold)
 
                                         Row() {
-                                            Text('每日一次, ' + translateMedicineTime(item.medicine_timing))
+                                            Text(
+                                                '每日 ' + item.frequency + ' 次, ' +
+                                                translateMedicineTime(item.medicine_timing)
+                                            )
                                                 .width('70%')
                                             Blank().width('19%')
                                             Text(translateType(item.medicine_type))

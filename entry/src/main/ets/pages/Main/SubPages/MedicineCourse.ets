@@ -13,6 +13,7 @@ interface data {
     amount: number; // 用药数量
     type: string; // 剂量单位
     plan_time: string;
+    frequency: number
 }
 
 interface courseAddResponse {
@@ -267,6 +268,7 @@ struct MedicineCourse {
                             amount: this.amount,
                             type: this.type,
                             plan_time: this.generateTime(this.courseStartTime),
+                            frequency: this.frequency
                         }
                         let httpRequest = http.createHttp();
                         let URL = baseURL + '/course'

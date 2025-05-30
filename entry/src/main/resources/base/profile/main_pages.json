@@ -1,5 +1,6 @@
 {
     "src": [
+        "pages/Index",
         "pages/Login/LoginPage",
         "pages/Main/MainPage",
         "pages/Main/ContentOnePage",
@@ -12,7 +13,6 @@
         "pages/Main/SubPages/AnswerPages/AnswerOnePages",
         "pages/Main/SubPages/AnswerPages/AnswerTwoPages",
         "pages/Main/SubPages/AnswerPages/AnswerThreePages",
-        "pages/Main/SubPages/AnswerPages/AnswerFourPages",
-        "pages/Index"
+        "pages/Main/SubPages/AnswerPages/AnswerFourPages"
     ]
 }
