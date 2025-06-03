@@ -73,6 +73,7 @@ export struct CalendarPage {
                     GridItem() {
                         Text(days !== '' ? days : ' ')
                             .fontSize(14)
+                            .fontFamily('HarmonyOS Sans')
                             .fontColor(this.shouldHighlight(parseInt(days)) ? '#ffffff' : '#000000')
                             .fontWeight(this.shouldHighlight(parseInt(days)) ? 'bold' : 'normal')
                             .width(30)

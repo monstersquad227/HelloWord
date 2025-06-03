@@ -1,7 +1,7 @@
 import { ContentFourPage } from './ContentFourPage';
-import { ContentOnePage } from './ContentOnePage';
 import { ContentThreePage } from './ContentThreePage';
 import { ContentTwoPage } from './ContentTwoPage';
+import { ContentOnePageV2 } from './SubPages/ContentOnePageV2';
 
 @Preview
 @Entry
@@ -31,7 +31,8 @@ struct MainPage {
     build() {
         Tabs({ barPosition: BarPosition.End }) {
             TabContent() {
-                ContentOnePage()
+                // ContentOnePage()
+                ContentOnePageV2()
             }
             .tabBar(this.tabBuilder("吃药打卡", 0, $r('app.media.icon'), $r('app.media.icon')))
 
