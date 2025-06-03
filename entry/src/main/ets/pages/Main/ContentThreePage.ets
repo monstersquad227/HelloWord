@@ -44,6 +44,7 @@ export struct ContentThreePage {
                 }
 
             }
+            .layoutWeight(1)
             .onStateChange(async () => {
                 this.isRefreshing = true
                 this.recordIterm = await recordList()

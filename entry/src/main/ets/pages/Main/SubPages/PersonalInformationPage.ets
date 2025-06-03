@@ -1,7 +1,7 @@
 import { CustomContentDialog, promptAction, router } from '@kit.ArkUI';
 import { http } from '@kit.NetworkKit';
+import { parseJSON } from '../../../common/function/medicineCourse';
 import { baseURL } from '../../../constant/constant';
-import { parseJSON } from '../ContentTwoPage';
 
 const ITEM_HEIGHT = '30.00vp'
 const ITEM_WIDTH = '80%'

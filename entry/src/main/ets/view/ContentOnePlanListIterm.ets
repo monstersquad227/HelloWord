@@ -1,6 +1,6 @@
+import { translateMedicineTime } from '../common/function/medicineCourse';
 import { CreatePlan } from '../common/function/medicinePlan';
 import { createPlanData } from '../common/interface/medicinePlan';
-import { translateMedicineTime } from '../pages/Main/ContentTwoPage';
 
 @Component
 export struct ContentOnePlanListIterm {

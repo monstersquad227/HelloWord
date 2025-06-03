@@ -3,9 +3,9 @@ import { promptAction, router } from '@kit.ArkUI';
 import { CalendarPage } from './CalendarPage/CalendarPage';
 import { http } from '@kit.NetworkKit';
 import { baseURL } from '../../constant/constant';
-import { parseJSON, translateMedicineTime } from './ContentTwoPage';
 import { createPlanData, planResponse, planResult } from '../../common/interface/medicinePlan';
 import { CreatePlan } from '../../common/function/medicinePlan';
+import { parseJSON, translateMedicineTime } from '../../common/function/medicineCourse';
 
 
 @Preview
