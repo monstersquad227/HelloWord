@@ -4,20 +4,9 @@ import { CalendarPage } from './CalendarPage/CalendarPage';
 import { http } from '@kit.NetworkKit';
 import { baseURL } from '../../constant/constant';
 import { parseJSON, translateMedicineTime } from './ContentTwoPage';
+import { createPlanData, planResponse, planResult } from '../../common/interface/medicinePlan';
+import { CreatePlan } from '../../common/function/medicinePlan';
 
-interface planResult {
-    medicine_name: string,
-    medicine_timing?: number,
-    amount: number,
-    type: string,
-    plan_time: string,
-}
-
-interface planResponse {
-    code: number,
-    message: string,
-    result: planResult[]
-}
 
 @Preview
 @Entry
@@ -87,7 +76,18 @@ export struct ContentOnePage {
                                                 .height('25%')
                                                 .type(ButtonType.Normal)
                                                 .onClick(() => {
-                                                    console.log('打卡: ', item.medicine_name)
+                                                    let body: createPlanData = {
+                                                        medicine_name: item.medicine_name,
+                                                        actual_time: this.generateActualTime(),
+                                                        memo: '',
+                                                        status: this.compareTime(item.plan_time)
+                                                    }
+                                                    CreatePlan(body)
+                                                    //
+                                                    // AlertDialog.show({
+                                                    //     title: 'record',
+                                                    //     message: JSON.stringify(body)
+                                                    // })
                                                 })
                                                 .margin({ right: '20.00vp' })
                                         }
@@ -97,14 +97,6 @@ export struct ContentOnePage {
                                     })
                                 }
 
-                                // }
-                                // .onRefreshing(() => {
-                                //     this.isRefresh = true
-                                //     this.getPlanList()
-                                //     setTimeout(() => {
-                                //         this.isRefresh = false
-                                //     }, 1000)
-                                // })
                             }
                         }.height('35%')
                     } else {
@@ -168,8 +160,38 @@ export struct ContentOnePage {
                 return;
             }
             this.planData = response.result
-            // AlertDialog.show({ title: 'plandata', message: this.planData.toString() })
         })
+    }
+
+    private generateActualTime(): string {
+        let date = new Date()
+        let yearStr = date.getFullYear().toString()
+        let year = String(yearStr).padStart(2, '0')
+        let monthStr = date.getMonth().toString()
+        let month = String(monthStr).padStart(2, '0')
+        let dayStr = date.getDay().toString()
+        let day = String(dayStr).padStart(2, '0')
+        let hourStr = date.getHours().toString()
+        let hour = String(hourStr).padStart(2, '0')
+
+        let minuteStr = date.getMinutes().toString()
+        let minute = String(minuteStr).padStart(2, '0')
+        return `${year}-${month}-${day} ${hour}:${minute}:00`
+    }
+
+    private compareTime(planTime: string): number {
+        let platTimes = planTime.split(':');
+        const planHour = parseInt(platTimes[0], 10);
+        const planMinute = parseInt(platTimes[1], 10);
+
+        // 计划时间的总分钟数
+        const planTotalMinutes = planHour * 60 + planMinute;
+
+        // 当前时间
+        let now = new Date();
+        let currentTotalMinutes = now.getHours() * 60 + now.getMinutes();
+        let diff = Math.abs(planTotalMinutes - currentTotalMinutes);
+        return diff > 15 ? 1 : 0;
     }
 }
 

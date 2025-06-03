@@ -1,0 +1,26 @@
+export interface planResult {
+    medicine_name: string,
+    medicine_timing?: number,
+    amount: number,
+    type: string,
+    plan_time: string,
+}
+
+export interface planResponse {
+    code: number,
+    message: string,
+    result: planResult[]
+}
+
+export interface createPlanData {
+    medicine_name: string,
+    actual_time: string,
+    memo: string,
+    status: number
+}
+
+export interface CreatePlanResponse {
+    code: number,
+    message: string,
+    result: number
+}
