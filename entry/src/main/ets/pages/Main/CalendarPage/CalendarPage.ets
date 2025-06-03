@@ -16,6 +16,7 @@ export struct CalendarPage {
         month: new Date().getMonth() + 1,
         day: new Date().getDate()
     };
+    @State selectedDay: number = this.today.day;
 
     build() {
         Column() {
@@ -58,6 +59,7 @@ export struct CalendarPage {
 
             // 日历主体
             Grid() {
+                // 周
                 ForEach(this.weekTitles, (weekTitles: string) => {
                     GridItem() {
                         Text(weekTitles)
@@ -66,38 +68,78 @@ export struct CalendarPage {
                     .width(40)
                 }, (weekTitles: string): string => weekTitles)
 
+                // 天
                 ForEach(this.days, (days: string) => {
                     GridItem() {
                         Text(days !== '' ? days : ' ')
                             .fontSize(14)
-                            .fontColor(
-                                this.year === this.today.year &&
-                                    this.month === this.today.month &&
-                                    parseInt(days) === this.today.day
-                                    ? '#ffffff'
-                                    : '#000000'
-                            )
-                            .fontWeight(
-                                this.year === this.today.year &&
-                                    this.month === this.today.month &&
-                                    parseInt(days) === this.today.day
-                                    ? 'bold'
-                                    : 'normal'
-                            )
+                            .fontColor(this.shouldHighlight(parseInt(days)) ? '#ffffff' : '#000000')
+                            .fontWeight(this.shouldHighlight(parseInt(days)) ? 'bold' : 'normal')
                             .width(30)
                             .height(30)
-                            .textAlign(TextAlign.Center)// .backgroundColor(days !== '' ? '#e6f7ff' : 'transparent')
-                            .backgroundColor(
-                                days !== '' &&
-                                    this.year === this.today.year &&
-                                    this.month === this.today.month &&
-                                    parseInt(days) === this.today.day
-                                    ? Color.Red
-                                    : 'transparent')
+                            .textAlign(TextAlign.Center)
+                            .backgroundColor(this.shouldHighlight(parseInt(days)) ? Color.Red : 'transparent')
                             .borderRadius(15)
+                            .onClick(() => {
+                                if (days !== '') {
+                                    this.selectedDay = parseInt(days)
+                                    const dateStr =
+                                        `${this.year}-${this.month.toString().padStart(2, '0')}-${days.padStart(2,
+                                            '0')}`;
+                                    AlertDialog.show({ title: 'Selected Date', message: dateStr })
+                                }
+                            })
+
+                        // Text(days !== '' ? days : ' ')
+                        //     .fontSize(14)
+                        //     .fontColor(
+                        //         this.year === this.today.year &&
+                        //             this.month === this.today.month &&
+                        //             parseInt(days) === this.today.day
+                        //             ? '#ffffff'
+                        //             : parseInt(days) === this.selectedDay ? '#ffffff' : '#000000'
+                        //     )
+                        //     .fontWeight(
+                        //         this.year === this.today.year &&
+                        //             this.month === this.today.month &&
+                        //             parseInt(days) === this.today.day
+                        //             ? 'bold'
+                        //             : parseInt(days) === this.selectedDay ? 'bold' : 'normal'
+                        //     )
+                        //     .width(30)
+                        //     .height(30)
+                        //     .textAlign(TextAlign.Center)// .backgroundColor(days !== '' ? '#e6f7ff' : 'transparent')
+                        //     .backgroundColor(
+                        //         // days !== '' &&
+                        //         //     this.year === this.today.year &&
+                        //         //     this.month === this.today.month &&
+                        //         //     parseInt(days) === this.today.day
+                        //         //     ? Color.Red
+                        //         //     : 'transparent'
+                        //         days !== '' &&
+                        //             (
+                        //                 (this.year === this.today.year &&
+                        //                     this.month === this.today.month &&
+                        //                     parseInt(days) === this.today.day) ||
+                        //                     parseInt(days) === this.selectedDay
+                        //             )
+                        //             ? Color.Red
+                        //             : 'transparent'
+                        //     )
+                        //     .borderRadius(15)
+                        //     .onClick(() => {
+                        //         if (days !== '') {
+                        //             this.selectedDay = parseInt(days)
+                        //             const dateStr =
+                        //                 `${this.year}-${this.month.toString().padStart(2, '0')}-${days.padStart(2,
+                        //                     '0')}`;
+                        //             AlertDialog.show({ title: 'Selected Date', message: dateStr })
+                        //         }
+                        //     })
                     }
                     .height(30)
                     .width(30)
+
                 }, (day: string): string => day + Math.random())
 
             }
@@ -108,9 +150,27 @@ export struct CalendarPage {
         .width('100%')
     }
 
+    private shouldHighlight(day: number): boolean {
+        if (isNaN(day)) {
+            return false
+        }
+        if (this.selectedDay !== null) {
+            return day === this.selectedDay
+        }
+        return (
+            this.year === this.today.year &&
+                this.month === this.today.month &&
+                day === this.today.day
+        )
+    }
+
     private goToday() {
+        // this.year = this.today.year
+        // this.month = this.today.month
+        // this.days = this.generateDays()
         this.year = this.today.year
         this.month = this.today.month
+        this.selectedDay = this.today.day
         this.days = this.generateDays()
     }
 
