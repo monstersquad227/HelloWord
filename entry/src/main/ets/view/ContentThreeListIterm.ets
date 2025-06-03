@@ -15,7 +15,7 @@ export struct ContentThreeListIterm {
                     .width('16')
                     .height('16')
             }
-            .border({ width: 1, color: '#ff73a2f5', radius: '8' })
+            .border({ width: 1, color: '#ff73a2f5', radius: { topLeft: '8.00vp', topRight: '8.00vp' } })
             .width('100%')
             .height('5%')
             .backgroundColor('#6498f1')

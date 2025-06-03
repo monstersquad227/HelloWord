@@ -27,7 +27,7 @@ export struct ContentThreePage {
                     .justifyContent(FlexAlign.Center)
                     .align(Alignment.Center)
                 } else {
-                    List() {
+                    List({ space: '20.00vp' }) {
                         ForEach(this.recordIterm, (item: recordListResponseResult) => {
                             ListItem() {
                                 ContentThreeListIterm({
@@ -36,6 +36,7 @@ export struct ContentThreePage {
                                     status: item.status
                                 })
                             }
+                            .border({ width: 1, color: '#cccccc', radius: 8 })
                         })
                     }
                     .padding('20.00vp')
