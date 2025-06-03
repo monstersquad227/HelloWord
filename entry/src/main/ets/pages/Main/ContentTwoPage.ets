@@ -71,9 +71,10 @@ export struct ContentTwoPage {
                         }
                     }
                     .width('100%')
-                    .height('88%')
+                    .height('85%')
                 } else {
                     Text('暂无数据')
+                        .height('70%')
                         .margin({ top: '100.00vp' })
                         .fontWeight(FontWeight.Bold)
                 }
@@ -84,7 +85,6 @@ export struct ContentTwoPage {
                 setTimeout(() => {
                     this.isRefreshing = false
                 }, 1000)
-                // this.isRefreshing = false
             })
 
 
