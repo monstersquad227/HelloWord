@@ -29,3 +29,15 @@ export interface recordListResponseResultV2Contents {
     memo?: string,
     status: number
 }
+
+export interface recordPutResponse {
+    code: number,
+    message: string,
+    result: number
+}
+
+export interface recordPutData {
+    actual_time: string,
+    is_checked: number,
+    plan_id: number,
+}

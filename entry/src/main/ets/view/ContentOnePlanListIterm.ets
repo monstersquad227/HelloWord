@@ -1,5 +1,6 @@
 import { translateMedicineTime } from '../common/function/medicineCourse';
-import { createPlanData } from '../common/interface/medicinePlan';
+import { recordUpdate } from '../common/function/medicinePlanRecord';
+import { recordPutData } from '../common/interface/medicinePlanRecord';
 
 @Component
 export struct ContentOnePlanListIterm {
@@ -33,13 +34,12 @@ export struct ContentOnePlanListIterm {
                     .type(ButtonType.Normal)
                     .border({ radius: '16.00vp' })
                     .onClick(() => {
-                        let body: createPlanData = {
+                        let body: recordPutData = {
                             plan_id: this.plan_id,
-                            medicine_name: this.medicine_name,
+                            is_checked: this.is_checked === 0 ? 1 : 0,
                             actual_time: this.generateActualTime(),
-                            memo: '',
-                            status: this.compareTime(this.plan_time)
                         }
+                        recordUpdate(body)
                         AlertDialog.show({ title: 'body', message: JSON.stringify(body) })
                         // CreatePlan(body)
                     })
