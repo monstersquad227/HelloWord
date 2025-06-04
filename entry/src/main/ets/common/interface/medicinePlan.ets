@@ -13,6 +13,7 @@ export interface planResponse {
 }
 
 export interface ListPlanData {
+    plan_id: number,
     medicine_name: string,
     medicine_timing?: number,
     amount: number,
@@ -23,10 +24,11 @@ export interface ListPlanData {
 export interface ListPlanResponse {
     code: number,
     message: string,
-    result: planResult[]
+    result: ListPlanData[]
 }
 
 export interface createPlanData {
+    plan_id: number,
     medicine_name: string,
     actual_time: string,
     memo: string,

@@ -30,6 +30,7 @@ export struct ContentOnePageV2 {
                             ForEach(this.planData, (item: ListPlanData) => {
                                 ListItem() {
                                     ContentOnePlanListIterm({
+                                        plan_id: item.plan_id,
                                         medicine_name: item.medicine_name,
                                         amount: item.amount,
                                         type: item.type,

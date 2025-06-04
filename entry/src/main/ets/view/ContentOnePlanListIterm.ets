@@ -9,6 +9,7 @@ export struct ContentOnePlanListIterm {
     @Prop type: string = '';
     @Prop plan_time: string = '';
     @Prop medicine_timing: number = 0;
+    @Prop plan_id: number = 0
 
     build() {
         Column() {
@@ -30,12 +31,14 @@ export struct ContentOnePlanListIterm {
                     .type(ButtonType.Normal)
                     .onClick(() => {
                         let body: createPlanData = {
+                            plan_id: this.plan_id,
                             medicine_name: this.medicine_name,
                             actual_time: this.generateActualTime(),
                             memo: '',
                             status: this.compareTime(this.plan_time)
                         }
-                        CreatePlan(body)
+                        AlertDialog.show({title: 'body', message: JSON.stringify(body)})
+                        // CreatePlan(body)
                     })
                     .margin({ right: '20.00vp' })
             }
