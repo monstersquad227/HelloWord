@@ -14,6 +14,7 @@ export interface planResponse {
 
 export interface ListPlanData {
     plan_id: number,
+    is_checked: number
     medicine_name: string,
     medicine_timing?: number,
     amount: number,

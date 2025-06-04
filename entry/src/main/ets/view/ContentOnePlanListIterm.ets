@@ -1,5 +1,4 @@
 import { translateMedicineTime } from '../common/function/medicineCourse';
-import { CreatePlan } from '../common/function/medicinePlan';
 import { createPlanData } from '../common/interface/medicinePlan';
 
 @Component
@@ -10,6 +9,7 @@ export struct ContentOnePlanListIterm {
     @Prop plan_time: string = '';
     @Prop medicine_timing: number = 0;
     @Prop plan_id: number = 0
+    @Prop is_checked: number = 0
 
     build() {
         Column() {
@@ -25,10 +25,13 @@ export struct ContentOnePlanListIterm {
 
                 Blank().layoutWeight(1)
 
-                Button('打卡')
-                    .width('60.00vp')
+                Button(this.is_checked === 0 ? '打卡' :
+                    '撤销打卡')// .width(this.is_checked === 0 ? '60.00vp' : '120.00vp')
+                    .width('90.00vp')
                     .height('60.00vp')
+                    .backgroundColor(this.is_checked === 0 ? null : Color.Grey)
                     .type(ButtonType.Normal)
+                    .border({ radius: '16.00vp' })
                     .onClick(() => {
                         let body: createPlanData = {
                             plan_id: this.plan_id,
@@ -37,7 +40,7 @@ export struct ContentOnePlanListIterm {
                             memo: '',
                             status: this.compareTime(this.plan_time)
                         }
-                        AlertDialog.show({title: 'body', message: JSON.stringify(body)})
+                        AlertDialog.show({ title: 'body', message: JSON.stringify(body) })
                         // CreatePlan(body)
                     })
                     .margin({ right: '20.00vp' })
