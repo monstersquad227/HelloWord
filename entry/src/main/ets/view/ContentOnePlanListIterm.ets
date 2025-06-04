@@ -52,10 +52,10 @@ export struct ContentOnePlanListIterm {
         let date = new Date()
         let yearStr = date.getFullYear().toString()
         let year = String(yearStr).padStart(2, '0')
-        let monthStr = date.getMonth().toString()
-        let month = String(monthStr).padStart(2, '0')
-        let dayStr = date.getDay().toString()
-        let day = String(dayStr).padStart(2, '0')
+        let monthStr = date.getMonth() + 1
+        let month = String(monthStr.toString()).padStart(2, '0')
+        let dayStr = date.getDay() + 1
+        let day = String(dayStr.toString()).padStart(2, '0')
         let hourStr = date.getHours().toString()
         let hour = String(hourStr).padStart(2, '0')
 
