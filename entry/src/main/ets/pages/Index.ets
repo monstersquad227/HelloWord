@@ -1,4 +1,4 @@
-import { router } from '@kit.ArkUI';
+import { router } from '@kit.ArkUI'
 
 @Entry
 @Component
@@ -7,13 +7,12 @@ struct Index {
 
     aboutToAppear(): void {
         setTimeout(() => {
-            const token = AppStorage.get<number>('aProp');
-            if (token === 47) {
-                // AlertDialog.show({ title: 'picture token', message: token?.toString() })
-                router.replaceUrl({ url: "pages/Main/MainPage" })
-            } else {
-                // AlertDialog.show({ title: 'picture token', message: token?.toString() })
+            // AlertDialog.show({ title: 'aProb', message: AppStorage.get('token') })
+            let token = AppStorage.get('token') ?? 'default'
+            if (token === 'default') {
                 router.replaceUrl({ url: "pages/Login/LoginPage" })
+            } else {
+                router.replaceUrl({ url: "pages/Main/MainPage" })
             }
         }, 200)
     }
