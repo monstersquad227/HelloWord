@@ -1,11 +1,11 @@
 import { recordList } from '../../common/function/medicinePlanRecord';
-import { recordListResponseResult } from '../../common/interface/medicinePlanRecord';
+import { recordListResponseResult, recordListResponseResultV2 } from '../../common/interface/medicinePlanRecord';
 import { ContentThreeListIterm } from '../../view/ContentThreeListIterm';
 
 @Preview
 @Component
 export struct ContentThreePage {
-    @State recordIterm: Array<recordListResponseResult> = [];
+    @State recordIterm: Array<recordListResponseResultV2> = [];
     @State isRefreshing: boolean = false;
 
     async aboutToAppear(): Promise<void> {
@@ -28,12 +28,16 @@ export struct ContentThreePage {
                     .align(Alignment.Center)
                 } else {
                     List({ space: '20.00vp' }) {
-                        ForEach(this.recordIterm, (item: recordListResponseResult) => {
+                        ForEach(this.recordIterm, (item: recordListResponseResultV2) => {
                             ListItem() {
+                                // ContentThreeListIterm({
+                                //     date: item.actual_time,
+                                //     content: item.medicine_name,
+                                //     status: item.status
+                                // })
                                 ContentThreeListIterm({
                                     date: item.actual_time,
-                                    content: item.medicine_name,
-                                    status: item.status
+                                    contents: item.contents
                                 })
                             }
                             .border({ width: 1, color: '#cccccc', radius: 8 })

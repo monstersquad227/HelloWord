@@ -1,6 +1,9 @@
+import { recordListResponseResultV2Contents } from '../common/interface/medicinePlanRecord'
+
 @Component
 export struct ContentThreeListIterm {
     @Prop date: string
+    @Prop contents: recordListResponseResultV2Contents[]
     @Prop content: string
     @Prop status: number
 
@@ -22,20 +25,36 @@ export struct ContentThreeListIterm {
             .padding('5')
             .justifyContent(FlexAlign.SpaceBetween)
 
-            Row() {
-                Text(this.content)
-                    .fontSize(14)
-                    .fontColor('#888888')
-                    .margin({ top: 4 })
-                Blank()
-                Text(this.translateStatus(this.status))
-                    .fontSize(14)
-                    .fontColor(this.status === 1 ? '#FF0000' : '#0000FF')
-                    .margin({ top: 4 })
-            }
-            .width('100%')
-            .padding('10')
-            .justifyContent(FlexAlign.SpaceBetween)
+            ForEach(this.contents, (item: recordListResponseResultV2Contents) => {
+                Row() {
+                    Text(item.medicine_name)
+                        .fontSize(14)
+                        .fontColor('#888888')
+                        .margin({ top: 4 })
+                    Blank()
+                    Text(this.translateStatus(item.status))
+                        .fontSize(14)
+                        .fontColor(item.status === 1 ? '#FF0000' : '#0000FF')
+                        .margin({ top: 4 })
+                }
+                .width('100%')
+                .padding('10')
+                .justifyContent(FlexAlign.SpaceBetween)
+            })
+            // Row() {
+            //     Text(this.content)
+            //         .fontSize(14)
+            //         .fontColor('#888888')
+            //         .margin({ top: 4 })
+            //     Blank()
+            //     Text(this.translateStatus(this.status))
+            //         .fontSize(14)
+            //         .fontColor(this.status === 1 ? '#FF0000' : '#0000FF')
+            //         .margin({ top: 4 })
+            // }
+            // .width('100%')
+            // .padding('10')
+            // .justifyContent(FlexAlign.SpaceBetween)
         }
         .width('100%')
         .margin({ bottom: 15 })

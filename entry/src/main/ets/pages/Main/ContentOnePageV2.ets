@@ -1,8 +1,8 @@
-import { ListPlan } from '../../../common/function/medicinePlan';
-import { ListPlanData } from '../../../common/interface/medicinePlan';
-import { CalendarPage } from '../CalendarPage/CalendarPage';
+import { ListPlan } from '../../common/function/medicinePlan';
+import { ListPlanData } from '../../common/interface/medicinePlan';
+import { CalendarPage } from './CalendarPage/CalendarPage';
 import { router } from '@kit.ArkUI';
-import { ContentOnePlanListIterm } from '../../../view/ContentOnePlanListIterm';
+import { ContentOnePlanListIterm } from '../../view/ContentOnePlanListIterm';
 
 @Component
 @Entry
@@ -42,7 +42,7 @@ export struct ContentOnePageV2 {
                                 .border({ width: 1, color: '#cccccc', radius: 8 })
                             })
                         }
-                        .margin({ top: '40.00vp' })
+                        .margin({ top: '50.00vp' })
                         .layoutWeight(1)
                     } else {
                         Column({ space: '20.00vp' }) {
@@ -60,7 +60,8 @@ export struct ContentOnePageV2 {
                                     router.pushUrl({ url: 'pages/Main/SubPages/MedicineCourse' })
                                 })
                         }
-                        .margin({ top: '40.00vp' })
+                        .margin({ top: '50.00vp' })
+                        .layoutWeight(1)
                     }
                 }
 

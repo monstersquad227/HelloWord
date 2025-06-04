@@ -1,7 +1,7 @@
 import { ContentFourPage } from './ContentFourPage';
 import { ContentThreePage } from './ContentThreePage';
 import { ContentTwoPageV2 } from './ContentTwoPageV2';
-import { ContentOnePageV2 } from './SubPages/ContentOnePageV2';
+import { ContentOnePageV2 } from './ContentOnePageV2';
 
 @Preview
 @Entry

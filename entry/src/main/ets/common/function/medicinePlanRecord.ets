@@ -1,9 +1,11 @@
-import { recordListResponse, recordListResponseResult } from '../interface/medicinePlanRecord';
+import { recordListResponse, recordListResponseResult,
+    recordListResponseResultV2,
+    recordListResponseV2 } from '../interface/medicinePlanRecord';
 import { http } from '@kit.NetworkKit';
 import { baseURL } from '../../constant/constant';
 import { promptAction } from '@kit.ArkUI';
 
-export async function recordList(): Promise<recordListResponseResult[]> {
+export async function recordList(): Promise<recordListResponseResultV2[]> {
     let httpRequest = http.createHttp();
     let URL = baseURL + '/record/' + AppStorage.get('user_id');
 
@@ -19,7 +21,7 @@ export async function recordList(): Promise<recordListResponseResult[]> {
         });
 
 
-        let res: recordListResponse = JSON.parse(resp.result as string);
+        let res: recordListResponseV2 = JSON.parse(resp.result as string);
 
         if (res.code !== 0) {
             promptAction.showToast({ message: res.message });
