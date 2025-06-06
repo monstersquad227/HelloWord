@@ -7,11 +7,11 @@
                 "material": {
                     "certpath": "/Users/monstersquad/.ohos/config/default_HelloWord_-2l3_IAktTKMNWFkowKHCGmWKN_4CLaIhNNzfdEkpmg=.cer",
                     "keyAlias": "debugKey",
-                    "keyPassword": "0000001AA62DA926DF88C81B2E216FDAC2756FEA16EC5B75BF8DB34E639966A8354CD8743BB9E1EC01DD",
+                    "keyPassword": "0000001A37995D9D07E8F7AD14212161A93C0DFA6E47C4B33C75E815159263575F831D1B959AA631B326",
                     "profile": "/Users/monstersquad/.ohos/config/default_HelloWord_-2l3_IAktTKMNWFkowKHCGmWKN_4CLaIhNNzfdEkpmg=.p7b",
                     "signAlg": "SHA256withECDSA",
                     "storeFile": "/Users/monstersquad/.ohos/config/default_HelloWord_-2l3_IAktTKMNWFkowKHCGmWKN_4CLaIhNNzfdEkpmg=.p12",
-                    "storePassword": "0000001A76289F955A3329601D589A0DFB98328D49A1AD44039E4E94A99ADCE9FDDAC4A57AE79FD83A1E"
+                    "storePassword": "0000001A7FB9051057BB1EC20CE1F6BA63C10B35CFAA8B06945A6D7485C5B7D061870506F446E0B9E95C"
                 }
             }
         ],
@@ -32,7 +32,7 @@
         ],
         "buildModeSet": [
             {
-                "name": "debug",
+                "name": "debug"
             },
             {
                 "name": "release"
